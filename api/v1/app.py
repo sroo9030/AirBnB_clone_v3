@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""
+This module sets up the Flask application and registers the blueprint.
+"""
 
 from flask import Flask
 from models import storage
@@ -11,7 +14,9 @@ app.register_blueprint(app_views)
 
 @app.teardown_appcontext
 def teardown_db(exception):
-    """ Close storage """
+    """
+    Closes the storage on teardown.
+    """
     storage.close()
 
 
