@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This module sets up the Flask application and registers the blueprint.
+This module defines the Flask application.
 """
 
 from flask import Flask
@@ -11,14 +11,12 @@ import os
 app = Flask(__name__)
 app.register_blueprint(app_views)
 
-
 @app.teardown_appcontext
-def teardown_db(exception):
+def teardown_appcontext(exception):
     """
-    Closes the storage on teardown.
+    Calls storage.close() at the end of the request.
     """
     storage.close()
-
 
 if __name__ == "__main__":
     host = os.getenv('HBNB_API_HOST', '0.0.0.0')
